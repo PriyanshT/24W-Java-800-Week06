@@ -1,6 +1,7 @@
 package org.georgiancollege.week06;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBUtility {
     // create variables to hold username, password and connection url
@@ -46,5 +47,39 @@ public class DBUtility {
         }
 
         return bookId;
+    }
+
+    // a static function which will retrieve from db and return an ArrayList
+    public static ArrayList<Book> getBooksFromDB(){
+        ArrayList<Book> books = new ArrayList<>();
+
+        String sql = "SELECT books.book_id, books.book_name, books.author, books.genre, books.price, books.is_available, COUNT(bookSales.sold_date) AS \"units_sold\"\n" +
+                "FROM books\n" +
+                "INNER JOIN bookSales\n" +
+                "ON books.book_id = bookSales.book_id\n" +
+                "GROUP BY books.book_id;";
+
+        try(
+                Connection conn = DriverManager.getConnection(connectURL, user, pass);
+                Statement statement = conn.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+                ){
+            while (resultSet.next()){
+                int bookId = resultSet.getInt("book_id");
+                String bookName = resultSet.getString("book_name");
+                String author = resultSet.getString("author");
+                String genre = resultSet.getString("genre");
+                double price = resultSet.getDouble("price");
+                boolean isAvailable = resultSet.getBoolean("is_available");
+                int unitsSold = resultSet.getInt("units_sold");
+
+                Book book = new Book(bookId, bookName, author, genre, price, isAvailable, unitsSold);
+                books.add(book);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return books;
     }
 }

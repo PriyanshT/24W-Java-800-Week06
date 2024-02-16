@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BookTableController implements Initializable {
@@ -37,7 +39,20 @@ public class BookTableController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ArrayList<Book> returnedBooks = DBUtility.getBooksFromDB();
+        System.out.println(returnedBooks);
 
+        // initialize all the columns with the model class
+        bookIdColumn.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+        bookNameColumn.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        availabilityColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
+        unitsSoldColumn.setCellValueFactory(new PropertyValueFactory<>("unitsSold"));
+
+        // add the data to the table view
+        tableView.getItems().addAll(returnedBooks);
     }
 
     @FXML

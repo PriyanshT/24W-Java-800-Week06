@@ -6,7 +6,7 @@ import java.util.List;
 // this is our model class
 public class Book {
     // variables and constants
-    private int bookId;
+    private int bookId, unitsSold;
     private String bookName, author, genre;
     private double price;
     private boolean isAvailable;
@@ -29,6 +29,12 @@ public class Book {
         setGenre(genre);
         setPrice(price);
         setAvailable(isAvailable);
+    }
+
+    // overloaded constructor with units sold
+    public Book(int bookId, String bookName, String author, String genre, double price, boolean isAvailable, int unitsSold) {
+        this(bookId, bookName, author, genre, price, isAvailable);
+        setUnitsSold(unitsSold);
     }
 
     // methods - getters, setters
@@ -83,7 +89,7 @@ public class Book {
 
     // a static method that holds all the genres
     public static List<String> findGenres(){
-        return Arrays.asList("Comedy", "Crime", "Fantasy", "Fiction", "Thriller", "Horror");
+        return Arrays.asList("Comedy", "Crime", "Fantasy", "Fiction", "Thriller", "Horror", "Drama");
     }
 
     public double getPrice() {
@@ -104,6 +110,14 @@ public class Book {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    public int getUnitsSold() {
+        return unitsSold;
+    }
+
+    public void setUnitsSold(int unitsSold) {
+        this.unitsSold = unitsSold;
     }
 
     // to string method
