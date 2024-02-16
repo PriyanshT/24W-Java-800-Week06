@@ -104,7 +104,7 @@ public class CreateBookController implements Initializable {
 
     @FXML
     void viewTableButton_onClick(ActionEvent event) {
-
+        SceneChanger.changeScenes(event, "book-table-view.fxml", "View Table!");
     }
 }
 
