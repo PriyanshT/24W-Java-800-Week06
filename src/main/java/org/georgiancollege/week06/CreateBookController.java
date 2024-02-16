@@ -102,5 +102,9 @@ public class CreateBookController implements Initializable {
         }
     }
 
+    @FXML
+    void viewTableButton_onClick(ActionEvent event) {
+
+    }
 }
 

@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
@@ -45,6 +46,11 @@
             </GridPane>
             <Button mnemonicParsing="false" onAction="#saveBook" text="Add Book" />
             <Label fx:id="finalLabel" text="Label" />
+            <HBox alignment="CENTER_RIGHT">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#viewTableButton_onClick" text="View Table" />
+               </children>
+            </HBox>
          </children>
          <padding>
             <Insets left="50.0" right="50.0" />
